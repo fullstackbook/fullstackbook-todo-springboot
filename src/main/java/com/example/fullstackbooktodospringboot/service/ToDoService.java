@@ -1,8 +1,8 @@
 package com.example.fullstackbooktodospringboot.service;
 
-import com.example.fullstackbooktodospringboot.dto.CreateToDoDTO;
-import com.example.fullstackbooktodospringboot.dto.ToDoDTO;
-import com.example.fullstackbooktodospringboot.dto.UpdateToDoDTO;
+import com.example.fullstackbooktodospringboot.dto.CreateToDoDto;
+import com.example.fullstackbooktodospringboot.dto.ToDoDto;
+import com.example.fullstackbooktodospringboot.dto.UpdateToDoDto;
 import com.example.fullstackbooktodospringboot.exception.ToDoException;
 import com.example.fullstackbooktodospringboot.model.ToDo;
 import com.example.fullstackbooktodospringboot.repository.ToDoRepository;
@@ -20,35 +20,35 @@ public class ToDoService {
         this.toDoRepository = toDoRepository;
     }
 
-    public ToDoDTO createTodo(CreateToDoDTO createToDoDTO) {
+    public ToDoDto createTodo(CreateToDoDto createToDoDTO) {
         ToDo newToDo = new ToDo();
         newToDo.setName(createToDoDTO.getName());
         newToDo.setCompleted(createToDoDTO.getCompleted());
         ToDo toDo = toDoRepository.save(newToDo);
-        return new ToDoDTO(toDo);
+        return new ToDoDto(toDo);
     }
 
-    public List<ToDoDTO> getToDos() {
+    public List<ToDoDto> getToDos() {
         List<ToDo> toDos = toDoRepository.findAll();
-        return toDos.stream().map(entity -> new ToDoDTO(entity)).toList();
+        return toDos.stream().map(entity -> new ToDoDto(entity)).toList();
     }
 
-    public ToDoDTO getToDoById(Long id) {
+    public ToDoDto getToDoById(Long id) {
         Optional<ToDo> toDo = toDoRepository.findById(id);
         if (toDo.isPresent()) {
-            return new ToDoDTO(toDo.get());
+            return new ToDoDto(toDo.get());
         } else {
             throw new ToDoException("todo not found", HttpStatus.NOT_FOUND);
         }
     }
 
-    public ToDoDTO updateToDo(Long id, UpdateToDoDTO updateToDo) {
+    public ToDoDto updateToDo(Long id, UpdateToDoDto updateToDo) {
         Optional<ToDo> toDo = toDoRepository.findById(id);
         if (toDo.isPresent()) {
             toDo.get().setName(updateToDo.getName());
             toDo.get().setCompleted(updateToDo.getCompleted());
             toDoRepository.save(toDo.get());
-            return new ToDoDTO(toDo.get());
+            return new ToDoDto(toDo.get());
         } else {
             throw new ToDoException("to do not found", HttpStatus.NOT_FOUND);
         }
