@@ -27,6 +27,11 @@ public class ToDoController {
         return name;
     }
 
+    @GetMapping("/todos/search")
+    public List<ToDoDto> search(@RequestParam String q) {
+        return toDoService.searchToDos(q);
+    }
+
     @PostMapping("/todos")
     public ResponseEntity<ToDoDto> createToDo(@RequestBody CreateToDoDto newToDo) {
         ToDoDto toDoDTO = toDoService.createTodo(newToDo);

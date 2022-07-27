@@ -8,6 +8,7 @@ import com.example.fullstackbooktodospringboot.model.ToDo;
 import com.example.fullstackbooktodospringboot.repository.ToDoRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +19,11 @@ public class ToDoService {
 
     public ToDoService (ToDoRepository toDoRepository) {
         this.toDoRepository = toDoRepository;
+    }
+
+    public List<ToDoDto> searchToDos(String q) {
+        List<ToDo> toDos = toDoRepository.findByNameContainingIgnoreCase(q);
+        return toDos.stream().map(entity -> new ToDoDto(entity)).toList();
     }
 
     public ToDoDto createTodo(CreateToDoDto createToDoDTO) {
@@ -38,7 +44,7 @@ public class ToDoService {
         if (toDo.isPresent()) {
             return new ToDoDto(toDo.get());
         } else {
-            throw new ToDoException("todo not found", HttpStatus.NOT_FOUND);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "to do not found");
         }
     }
 
@@ -50,7 +56,7 @@ public class ToDoService {
             toDoRepository.save(toDo.get());
             return new ToDoDto(toDo.get());
         } else {
-            throw new ToDoException("to do not found", HttpStatus.NOT_FOUND);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "to do not found");
         }
     }
 
@@ -59,6 +65,7 @@ public class ToDoService {
         if (toDo.isPresent()) {
             toDoRepository.delete(toDo.get());
         } else {
+            // custom exception example
             throw new ToDoException("to do not found", HttpStatus.NOT_FOUND);
         }
     }
