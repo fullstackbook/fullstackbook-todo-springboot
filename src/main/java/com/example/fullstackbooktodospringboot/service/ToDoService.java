@@ -21,11 +21,6 @@ public class ToDoService {
         this.toDoRepository = toDoRepository;
     }
 
-    public List<ToDoDto> searchToDos(String q) {
-        List<ToDo> toDos = toDoRepository.findByNameContainingIgnoreCase(q);
-        return toDos.stream().map(entity -> new ToDoDto(entity)).toList();
-    }
-
     public ToDoDto createTodo(CreateToDoDto createToDoDTO) {
         ToDo newToDo = new ToDo();
         newToDo.setName(createToDoDTO.getName());
@@ -36,6 +31,11 @@ public class ToDoService {
 
     public List<ToDoDto> getToDos() {
         List<ToDo> toDos = toDoRepository.findAll();
+        return toDos.stream().map(entity -> new ToDoDto(entity)).toList();
+    }
+
+    public List<ToDoDto> getToDos(Boolean completed) {
+        List<ToDo> toDos = toDoRepository.findByCompleted(completed);
         return toDos.stream().map(entity -> new ToDoDto(entity)).toList();
     }
 

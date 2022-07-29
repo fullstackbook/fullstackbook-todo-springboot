@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/todos")
@@ -19,11 +20,6 @@ public class ToDoController {
         this.toDoService = toDoService;
     }
 
-    @GetMapping("/search")
-    public List<ToDoDto> search(@RequestParam String q) {
-        return toDoService.searchToDos(q);
-    }
-
     @PostMapping("")
     public ResponseEntity<ToDoDto> createToDo(@RequestBody CreateToDoDto newToDo) {
         ToDoDto toDoDTO = toDoService.createTodo(newToDo);
@@ -31,7 +27,10 @@ public class ToDoController {
     }
 
     @GetMapping("")
-    public List<ToDoDto> getToDos() {
+    public List<ToDoDto> getToDos(@RequestParam Optional<Boolean> completed) {
+        if (completed.isPresent()) {
+            return toDoService.getToDos(completed.get());
+        }
         return toDoService.getToDos();
     }
 
