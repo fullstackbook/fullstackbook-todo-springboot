@@ -5,13 +5,5 @@
         xmlns:pro="http://www.liquibase.org/xml/ns/pro"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd
       http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.5.xsd">
-    <changeSet id="1" author="fullstackbook">
-        <createTable tableName="todos">
-            <column name="id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true"/>
-            </column>
-            <column name="name" type="varchar"/>
-        </createTable>
-    </changeSet>
-    <includeAll path="db/changelog/changelog-*.xml" />
+    <includeAll path="db/changelog/*.sql" />
 </databaseChangeLog>
