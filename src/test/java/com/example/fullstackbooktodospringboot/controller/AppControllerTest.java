@@ -15,8 +15,6 @@ import static org.hamcrest.CoreMatchers.containsString;
 @SpringBootTest
 @AutoConfigureMockMvc
 public class AppControllerTest {
-    @Value("${spring.application.name}")
-    private String name;
 
     @Autowired
     private MockMvc mockMvc;
@@ -24,7 +22,7 @@ public class AppControllerTest {
     @Test
     public void getRoot() throws Exception {
         mockMvc.perform(get("/"))
-                .andExpect(status().isOk()).andExpect(content().string(containsString(name)));
+                .andExpect(status().isOk()).andExpect(content().string(containsString("Hello World")));
     }
 
 }
