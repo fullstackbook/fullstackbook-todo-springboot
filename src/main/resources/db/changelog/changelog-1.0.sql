@@ -2,6 +2,6 @@
 
 --changeset fullstackbook:1
 create table todos (
-  id int primary key,
+  id bigserial primary key,
   name text
 );
