@@ -16,6 +16,6 @@ public class AppController {
     @GetMapping("/")
     public String getRoot() {
         logger.info(name);
-        return name;
+        return "Hello World";
     }
 }
