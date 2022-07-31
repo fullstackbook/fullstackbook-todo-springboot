@@ -44,7 +44,7 @@ public class ToDoService {
         if (toDo.isPresent()) {
             return new ToDoDto(toDo.get());
         } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "to do not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "getToDoById - to do not found");
         }
     }
 
@@ -56,7 +56,7 @@ public class ToDoService {
             toDoRepository.save(toDo.get());
             return new ToDoDto(toDo.get());
         } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "to do not found");
+            throw new ToDoException(404, "updateToDo - to do not found");
         }
     }
 
@@ -65,8 +65,7 @@ public class ToDoService {
         if (toDo.isPresent()) {
             toDoRepository.delete(toDo.get());
         } else {
-            // custom exception example
-            throw new ToDoException("to do not found", HttpStatus.NOT_FOUND);
+            throw new RuntimeException("deleteToDo - to do not found");
         }
     }
 }

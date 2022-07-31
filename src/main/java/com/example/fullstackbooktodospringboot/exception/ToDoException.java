@@ -3,14 +3,14 @@ package com.example.fullstackbooktodospringboot.exception;
 import org.springframework.http.HttpStatus;
 
 public class ToDoException extends RuntimeException {
-    private HttpStatus httpStatus;
+    private int status;
 
-    public ToDoException(String message, HttpStatus httpStatus) {
+    public ToDoException(int status, String message) {
         super(message);
-        this.httpStatus = httpStatus;
+        this.status = status;
     }
 
-    public HttpStatus getHttpStatus() {
-        return httpStatus;
+    public int getStatus() {
+        return status;
     }
 }
