@@ -1,4 +1,4 @@
-# Full Stack Book Spring Boot
+# Full Stack Book To Do Spring Boot
 
 https://www.fullstackbook.com/docs/projects/todo/backend/springboot
 
