@@ -1,6 +1,6 @@
 # Full Stack Book Spring Boot
 
-http://localhost:3000/docs/projects/todo/backend/springboot
+https://www.fullstackbook.com/docs/projects/todo/backend/springboot
 
 ## Setup
 
