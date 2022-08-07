@@ -40,8 +40,8 @@ public class ToDoController {
     }
 
     @PutMapping("/{id}")
-    public ToDoDto updateToDo(@PathVariable Long id, @RequestBody UpdateToDoDto updateToDo) {
-        return toDoService.updateToDo(id, updateToDo);
+    public ToDoDto updateToDo(@PathVariable Long id, @RequestBody UpdateToDoDto updateToDoDto) {
+        return toDoService.updateToDo(id, updateToDoDto);
     }
 
     @DeleteMapping("/{id}")

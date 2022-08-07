@@ -48,11 +48,11 @@ public class ToDoService {
         }
     }
 
-    public ToDoDto updateToDo(Long id, UpdateToDoDto updateToDo) {
+    public ToDoDto updateToDo(Long id, UpdateToDoDto updateToDoDto) {
         Optional<ToDo> toDo = toDoRepository.findById(id);
         if (toDo.isPresent()) {
-            toDo.get().setName(updateToDo.getName());
-            toDo.get().setCompleted(updateToDo.getCompleted());
+            toDo.get().setName(updateToDoDto.getName());
+            toDo.get().setCompleted(updateToDoDto.getCompleted());
             toDoRepository.save(toDo.get());
             return new ToDoDto(toDo.get());
         } else {
