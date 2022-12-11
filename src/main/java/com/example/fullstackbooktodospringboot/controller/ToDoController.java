@@ -1,9 +1,6 @@
 package com.example.fullstackbooktodospringboot.controller;
 
-import com.example.fullstackbooktodospringboot.dto.CreateToDoDto;
-import com.example.fullstackbooktodospringboot.dto.ToDoDto;
-import com.example.fullstackbooktodospringboot.dto.ToDoNameDto;
-import com.example.fullstackbooktodospringboot.dto.UpdateToDoDto;
+import com.example.fullstackbooktodospringboot.dto.*;
 import com.example.fullstackbooktodospringboot.projection.ToDoView;
 import com.example.fullstackbooktodospringboot.service.ToDoService;
 import org.springframework.http.HttpStatus;
@@ -49,6 +46,16 @@ public class ToDoController {
     @GetMapping("/testClassBasedProjectionWithJpqlQuery")
     public List<ToDoNameDto> testClassBasedProjectionWithJpqlQuery() {
         return toDoService.getAllToDoNameDtos();
+    }
+
+    @GetMapping("/testDynamicProjection")
+    public List<ToDoNameDto> testDynamicProjection(@RequestParam String name) {
+        return toDoService.findAllNamesByName(name);
+    }
+
+    @GetMapping("/testDynamicProjection2")
+    public List<ToDoIdDto> testDynamicProjection2(@RequestParam String name) {
+        return toDoService.findAllIdsByName(name);
     }
 
     @GetMapping("/{id}")

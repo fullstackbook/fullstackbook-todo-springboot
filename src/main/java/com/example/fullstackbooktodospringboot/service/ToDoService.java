@@ -1,9 +1,6 @@
 package com.example.fullstackbooktodospringboot.service;
 
-import com.example.fullstackbooktodospringboot.dto.CreateToDoDto;
-import com.example.fullstackbooktodospringboot.dto.ToDoDto;
-import com.example.fullstackbooktodospringboot.dto.ToDoNameDto;
-import com.example.fullstackbooktodospringboot.dto.UpdateToDoDto;
+import com.example.fullstackbooktodospringboot.dto.*;
 import com.example.fullstackbooktodospringboot.exception.ToDoException;
 import com.example.fullstackbooktodospringboot.model.ToDo;
 import com.example.fullstackbooktodospringboot.projection.ToDoView;
@@ -51,6 +48,14 @@ public class ToDoService {
 
     public List<ToDoNameDto> getAllToDoNameDtos() {
         return toDoRepository.getAllNames();
+    }
+
+    public List<ToDoNameDto> findAllNamesByName(String name) {
+        return toDoRepository.findAllByName(name, ToDoNameDto.class);
+    }
+
+    public List<ToDoIdDto> findAllIdsByName(String name) {
+        return toDoRepository.findAllByName(name, ToDoIdDto.class);
     }
 
     public ToDoDto getToDoById(Long id) {

@@ -22,4 +22,7 @@ public interface ToDoRepository extends JpaRepository<ToDo, Long> {
     // note: class based projection does not work with native query
     @Query(value = "select new com.example.fullstackbooktodospringboot.dto.ToDoNameDto(t.name) from ToDo t")
     List<ToDoNameDto> getAllNames();
+
+    // dynamic projection
+    <T> List<T> findAllByName(String name, Class<T> type);
 }
