@@ -2,9 +2,11 @@ package com.example.fullstackbooktodospringboot.service;
 
 import com.example.fullstackbooktodospringboot.dto.CreateToDoDto;
 import com.example.fullstackbooktodospringboot.dto.ToDoDto;
+import com.example.fullstackbooktodospringboot.dto.ToDoNameDto;
 import com.example.fullstackbooktodospringboot.dto.UpdateToDoDto;
 import com.example.fullstackbooktodospringboot.exception.ToDoException;
 import com.example.fullstackbooktodospringboot.model.ToDo;
+import com.example.fullstackbooktodospringboot.projection.ToDoView;
 import com.example.fullstackbooktodospringboot.repository.ToDoRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -37,6 +39,18 @@ public class ToDoService {
     public List<ToDoDto> getToDos(Boolean completed) {
         List<ToDo> toDos = toDoRepository.findByCompleted(completed);
         return toDos.stream().map(entity -> new ToDoDto(entity)).toList();
+    }
+
+    public List<ToDoView> getAllToDoViews() {
+        return toDoRepository.findAllNames();
+    }
+
+    public List<ToDoNameDto> getNamesByName(String name) {
+        return toDoRepository.findByName(name);
+    }
+
+    public List<ToDoNameDto> getAllToDoNameDtos() {
+        return toDoRepository.getAllNames();
     }
 
     public ToDoDto getToDoById(Long id) {

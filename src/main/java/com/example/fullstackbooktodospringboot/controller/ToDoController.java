@@ -2,7 +2,9 @@ package com.example.fullstackbooktodospringboot.controller;
 
 import com.example.fullstackbooktodospringboot.dto.CreateToDoDto;
 import com.example.fullstackbooktodospringboot.dto.ToDoDto;
+import com.example.fullstackbooktodospringboot.dto.ToDoNameDto;
 import com.example.fullstackbooktodospringboot.dto.UpdateToDoDto;
+import com.example.fullstackbooktodospringboot.projection.ToDoView;
 import com.example.fullstackbooktodospringboot.service.ToDoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +34,21 @@ public class ToDoController {
             return toDoService.getToDos(completed.get());
         }
         return toDoService.getToDos();
+    }
+
+    @GetMapping("/testInterfaceProjection")
+    public List<ToDoView> testInterfaceProjection() {
+        return toDoService.getAllToDoViews();
+    }
+
+    @GetMapping("/testClassBasedProjection")
+    public List<ToDoNameDto> testClassBasedProjection(@RequestParam String name) {
+        return toDoService.getNamesByName(name);
+    }
+
+    @GetMapping("/testClassBasedProjectionWithJpqlQuery")
+    public List<ToDoNameDto> testClassBasedProjectionWithJpqlQuery() {
+        return toDoService.getAllToDoNameDtos();
     }
 
     @GetMapping("/{id}")
