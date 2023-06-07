@@ -14,6 +14,7 @@ import java.util.List;
 
 import static org.mockito.Mockito.when;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -36,5 +37,6 @@ public class ToDoServiceTest {
         when(toDoRepository.findAll()).thenReturn(todos);
         List<ToDoDto> todoDtoList = toDoService.getToDos();
         assertThat(todoDtoList).hasSize(1);
+        assertEquals(1, todoDtoList.size());
     }
 }
